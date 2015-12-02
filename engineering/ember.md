@@ -64,6 +64,31 @@ export default DS.Model.extend({
 });
 ```
 
+### Use `get` and `set`
+
+Calling `someObj.get('prop')` couples your code to the fact that
+`someObj` is an Ember Object. It prevents you from passing in a
+POJO, which is sometimes preferable in testing. It also yields a more
+informative error when called with `null` or `undefined`.
+
+Although when defining a method in a controller, component, etc. you
+can be fairly sure `this` is an Ember Object, for consistency with the
+above, we still use `get`/`set`.
+
+```js
+// Good
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
+
+set(this, 'isSelected', true);
+get(this, 'isSelected');
+
+// Bad
+
+this.set('isSelected', true);
+this.get('isSelected');
+```
+
 ## Organizing your modules
 
 ```js
