@@ -218,6 +218,31 @@ more complex logic in this case.
 {{/each}}
 ```
 
+### Ordering static attributes, dynamic attributes, and action helpers for HTML elements
+
+Ultimately, we should make it easier for other developers to read templates.
+Ordering attributes and then action helpers will provide clarity.
+
+```hbs
+{{! Bad }}
+
+<button disabled={{isDisabled}} data-auto-id="click-me" {{action (action click)}} name="wonderful-button" class="wonderful-button">Click me</button>
+
+```
+
+```hbs
+{{! Good }}
+
+<button class="wonderful-button"
+  data-auto-id="click-me"
+  name="wonderful-button"
+  disabled={{isDisabled}}
+  {{action (action click)}}>
+    Click me
+</button>
+
+```
+
 ## Routing
 
 ### Route naming
