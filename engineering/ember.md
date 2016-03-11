@@ -94,7 +94,7 @@ as this makes it easier to avoid the "You have turned on testing mode,
 which disabled the run-loop's autorun..." message.
 ```js
 // ok
-test('thing-componenent', function(assert) {
+test('thing-component', function(assert) {
   render(hbs`{{thing-component value=value}}`);
   this.set('value', 10);
   assert.equal(this.$().text().trim(), '10', 'it updates when the value is changed');
