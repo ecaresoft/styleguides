@@ -89,6 +89,18 @@ this.set('isSelected', true);
 this.get('isSelected');
 ```
 
+Note: you may use `this.set` in tests to set values on the test context,
+as this makes it easier to avoid the "You have turned on testing mode,
+which disabled the run-loop's autorun..." message.
+```js
+// ok
+test('thing-componenent', function(assert) {
+  render(hbs`{{thing-component value=value}}`);
+  this.set('value', 10);
+  assert.equal(this.$().text().trim(), '10', 'it updates when the value is changed');
+});
+```
+
 ## Organizing your modules
 
 ```js
