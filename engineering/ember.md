@@ -47,6 +47,8 @@ export default Model.extend({
 export default DS.Model.extend({
   firstName: DS.attr('string'),
   lastName: DS.attr('string'),
+  
+  surname: Ember.computed.alias('lastName'),
 
   fullName: Ember.computed('firstName', 'lastName', {
     get() {
@@ -56,11 +58,41 @@ export default DS.Model.extend({
     set() {
       // Code
     }
-  }),
+  })
+});
+```
 
+### Do not use Ember's `function` prototype extensions
+
+```javascript
+// Good
+
+export default Model.extend({
+  firstName: attr('string'),
+  lastName: attr('string'),
+
+  fullName: computed('firstName', 'lastName', function() {
+    // Code
+  }),
+  
+  firstNameDidChange: observer('firstName', function() {
+    // Code
+  })
+});
+
+// Bad
+
+export default Model.extend({
+  firstName: attr('string'),
+  lastName: attr('string'),
+  
   fullNameBad: function() {
     // Code
-  }.property('firstName', 'lastName')
+  }.property('firstName', 'lastName'),
+  
+  firstNameDidChange: function() {
+    // Code
+  }.observes('firstName')
 });
 ```
 
